@@ -13,6 +13,8 @@ library(stats)
 library(rstatix)
 library(ggpubr)
 
+packageVersion("rstatix")
+
 #######################################################
 
 
@@ -227,7 +229,7 @@ df2_MWU <- df2 %>% group_by(Group) %>% wilcox_test(Output ~ ID)
 df2libprepkit_plot <- ggplot(df2libprepkit_DS, aes(x = ID, y = mean)) +
   geom_jitter(width = 0.1, height = NULL, data = df2libprepkit, aes(x = ID, y = Output), 
               stat = "identity", size = 4, stroke = 0.25, alpha = 0.5) + 
-  geom_col(fill = "#440555", colour = "black", alpha = 0.3) +
+  geom_col(fill = "#440555", colour = "black", alpha = 0.3, width = 0.5) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   xlab("") +
   ylab("Concentration (ng/uL)") + 
@@ -248,7 +250,7 @@ df2libprepkit_plot
 df2frag_plot <- ggplot(df2frag_DS, aes(x = ID, y = mean)) +
   geom_jitter(width = 0.1, height = NULL, data = df2frag, aes(x = ID, y = Output), 
               stat = "identity", size = 4, stroke = 0.25, alpha = 0.5) + 
-  geom_col(fill = "#3A558A" ,colour = "black", alpha = 0.3) +
+  geom_col(fill = "#3A558A" ,colour = "black", alpha = 0.3, width = 0.5) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   xlab("") +
   ylab("Concentration (ng/uL)") + 
@@ -271,7 +273,7 @@ big_DS_p3 <- ((df2libprepkit_plot)/(df2frag_plot)) + plot_annotation(tag_levels 
 big_DS_p3
 
 # save plot to PDF
-# ggsave("Illumina_lib_prep_op_combined_colored_082825.pdf", height=7, width=5, units="in")
+# ggsave("Illumina_lib_prep_op_combined_colored_101325.pdf", height=7, width=5, units="in")
 
 ########################################################################## END Library Preparation Optimization
 
@@ -350,7 +352,7 @@ group_colors <- c("Illumina" = "#440555", "Nanopore" = "#3A558A")
 # create plot
 df3gp_DS_barplot <- ggplot(df3gp_DS, aes(x = ID, y = mean)) +
   geom_point(data = df3gp, aes(x = ID, y = Output), stat = "identity", size = 4, stroke = 0.25, alpha = 0.5) + 
-  geom_col(fill = group_colors , colour = "black", alpha = 0.3) +
+  geom_col(fill = group_colors , colour = "black", alpha = 0.3, width = 0.5) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   xlab("") +
   ylab("Percent Genome\nCompletness") + 
@@ -371,7 +373,7 @@ df3gp_DS_barplot
 df3aln_DS_barplot <- ggplot(df3aln_DS, aes(x = ID, y = mean)) +
   geom_jitter(width = 0.05, height = NULL, data = df3aln, aes(x = ID, y = Output), 
               stat = "identity", size = 4, stroke = 0.25, alpha = 0.5) + 
-  geom_col(fill = group_colors , colour = "black", alpha = 0.3) +
+  geom_col(fill = group_colors , colour = "black", alpha = 0.3, width = 0.5) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   xlab("") +
   ylab("Percent\nAligned (%)")+ 
@@ -391,7 +393,7 @@ df3aln_DS_barplot
 df3normcov_DS_barplot <- ggplot(df3normcov_DS, aes(x = ID, y = mean)) +
   geom_jitter(width = 0.05, height = NULL, data = df3normcov, aes(x = ID, y = Output), 
               stat = "identity", size = 4, stroke = 0.25, alpha = 0.5) + 
-  geom_col(fill = group_colors , colour = "black", alpha = 0.3) +
+  geom_col(fill = group_colors , colour = "black", alpha = 0.3, width = 0.5) +
   geom_errorbar(aes(ymin = ci_lower, ymax = ci_upper), width = 0.2) +
   xlab("") +
   ylab("Coverage Depth(X)\n/Reads(M)") + 
@@ -413,6 +415,6 @@ big_DS_p2 <- ((df3gp_DS_barplot)/(df3aln_DS_barplot)/(df3normcov_DS_barplot)) + 
 big_DS_p2
 
 # save plot to PDF
-# ggsave("BTV_op_long_v_short_combined_colored_082825.pdf", height=6, width=8, units="in")
+# ggsave("BTV_op_long_v_short_combined_colored_101325.pdf", height=6, width=8, units="in")
 
 ################################################################################## END Long vs Short Sequencing
